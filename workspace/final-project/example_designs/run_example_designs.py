@@ -27,6 +27,7 @@ def run_mapper(
     problem: Optional[str] = None,
     generate_ref_outputs: Optional[bool] = False,
     remove_sparse_opts: Optional[bool] = False,
+    network_name: Optional[str] = None,
 ):
     # This data will be supplied when rendering the top jinja2 template
     jinja_parse_data = {"architecture": arch_target}
@@ -41,7 +42,7 @@ def run_mapper(
     if generate_ref_outputs:
         output_dir = f"{EXAMPLE_DIR}/{arch_target}/ref_outputs/{problem_name}"
     else:
-        output_dir = f"{EXAMPLE_DIR}/{arch_target}/outputs/{problem_name}"
+        output_dir = f"{EXAMPLE_DIR}/{arch_target}/outputs/{network_name}/{problem_name}"
 
     print(f"\n\nRunning mapper for target {arch_target} in {output_dir}...")
 
@@ -94,6 +95,7 @@ if __name__ == "__main__":
 
     # Put togher the list of problems to run
     problems = [None]
+    problem_name = args.problem
     if args.problem:
         problem = os.path.join(THIS_SCRIPT_DIR, "layer_shapes", args.problem)
         if os.path.isdir(problem):
@@ -104,7 +106,7 @@ if __name__ == "__main__":
     # Run parallel processes for all architectures and problems
     joblib.Parallel(n_jobs=args.n_jobs)(
         joblib.delayed(run_mapper)(
-            a, p, args.generate_ref_outputs, args.remove_sparse_opts
+            a, p, args.generate_ref_outputs, args.remove_sparse_opts, problem_name
         )
         for a in arch
         for p in problems
