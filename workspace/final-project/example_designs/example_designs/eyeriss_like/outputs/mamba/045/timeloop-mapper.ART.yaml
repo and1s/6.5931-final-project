@@ -1,0 +1,19 @@
+ART:
+    version: '0.4'
+    tables:
+      - name: system_top_level.DRAM[1..1]
+        area: 0.0
+      - name: system_top_level.inter_PE_column_spatial[1..1]
+        area: 1.0
+      - name: system_top_level.inter_PE_spatial[1..14]
+        area: 1.0
+      - name: system_top_level.shared_glb[1..1]
+        area: 217363.36892
+      - name: system_top_level.ifmap_spad[1..168]
+        area: 726.319911
+      - name: system_top_level.weights_spad[1..168]
+        area: 11609.35158
+      - name: system_top_level.psum_spad[1..168]
+        area: 968.426548
+      - name: system_top_level.mac[1..168]
+        area: 191.82
