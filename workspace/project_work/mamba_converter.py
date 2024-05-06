@@ -23,13 +23,13 @@ import torch.nn as nn
 import torch.nn.functional as F
 from model import Mamba, generate
 
-model = Mamba.from_pretrained('state-spaces/mamba-370m')
+model = Mamba.from_pretrained('state-spaces/mamba-1.4b')
 tokenizer = AutoTokenizer.from_pretrained('EleutherAI/gpt-neox-20b')
 
 input_shape = (10, 10)
 batch_size = 1
 top_dir = 'workloads'
-sub_dir = 'mamba_370m'
+sub_dir = 'mamba_1.4b'
 
 
 prompt = 'I like to put pepperonis on my '
