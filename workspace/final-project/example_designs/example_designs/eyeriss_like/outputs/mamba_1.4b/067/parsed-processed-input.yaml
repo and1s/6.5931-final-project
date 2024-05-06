@@ -27,8 +27,8 @@ architecture:
                 meshY: 1
                 power_gated_at: null
             required_actions:
-              - write
               - read
+              - write
               - leak
               - update
             enabled: true
@@ -52,8 +52,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
               - read
+              - write
               - leak
               - update
             enabled: true
@@ -113,8 +113,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
               - read
+              - write
               - leak
               - update
             enabled: true
@@ -138,8 +138,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
               - read
+              - write
               - leak
               - update
             enabled: true
@@ -164,8 +164,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
               - read
+              - write
               - leak
               - update
             enabled: true
@@ -185,7 +185,7 @@ architecture:
 architecture_constraints:
     targets:
       - type: temporal
-        permutation: QPNSRG
+        permutation: PNRMC
         target: DRAM
       - keep:
           - Inputs
@@ -195,11 +195,11 @@ architecture_constraints:
         type: bypass
         target: shared_glb
       - type: temporal
-        permutation: QPNSRG
+        permutation: PNRMC
         target: shared_glb
       - type: spatial
         factors: N=1,C=1,P=1,R=1,S=1
-        permutation: GNCPRSQM
+        permutation: NCPRSQM
         split: 7
         target: inter_PE_column_spatial
       - factors: G=1,C=1,M=1,R=1,S=1,N=1,P=1,Q=1
@@ -214,7 +214,7 @@ architecture_constraints:
         target: inter_PE_column_spatial
       - type: spatial
         factors: N=1,P=1,Q=1,R=1
-        permutation: GNPQRSCM
+        permutation: NPQRSCM
         split: 4
         target: inter_PE_spatial
       - factors: G=1,C=1,M=1,R=1,S=1,N=1,P=1,Q=1
@@ -234,7 +234,7 @@ architecture_constraints:
           - Weights
           - Outputs
         target: ifmap_spad
-      - permutation: GNMCPQRS
+      - permutation: NMCPQRS
         factors: N=1,M=1,C=1,P=1,Q=1,R=1,S=1
         type: temporal
         target: ifmap_spad
@@ -242,10 +242,10 @@ architecture_constraints:
           - Weights
         type: bypass
         bypass:
-          - Outputs
           - Inputs
+          - Outputs
         target: weights_spad
-      - permutation: GNMPQSCR
+      - permutation: NMPQSCR
         factors: N=1,M=1,P=1,Q=1,S=1
         type: temporal
         target: weights_spad
@@ -253,29 +253,29 @@ architecture_constraints:
           - Outputs
         type: bypass
         bypass:
-          - Weights
           - Inputs
+          - Weights
         target: psum_spad
-      - permutation: GNCPQRSM
+      - permutation: NCPQRSM
         factors: N=1,C=1,R=1,S=1,P=1,Q=1
         type: temporal
         target: psum_spad
 problem:
     instance:
-        C: 4096
-        G: 1
-        M: 160
+        C: 1
+        G: 4096
+        M: 1
         N: 1
         P: 1
-        Q: 1
+        Q: 13
         R: 1
-        S: 1
+        S: 4
         densities: {}
     shape:
         coefficients:
-          - default: 4096
+          - default: 1
             name: Cgroup
-          - default: 160
+          - default: 1
             name: Mgroup
           - default: 1
             name: Hstride
@@ -321,7 +321,7 @@ problem:
           - N
           - P
           - Q
-        name: layers_13_mixer_x_proj
+        name: layers_11_mixer_conv1d
     version: '0.4'
 compound_components:
     version: '0.4'

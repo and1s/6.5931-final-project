@@ -29,8 +29,8 @@ architecture:
             required_actions:
               - update
               - read
-              - write
               - leak
+              - write
             enabled: true
           - name: shared_glb[1..1]
             class: smartbuffer_SRAM
@@ -54,8 +54,8 @@ architecture:
             required_actions:
               - update
               - read
-              - write
               - leak
+              - write
             enabled: true
           - name: inter_PE_column_spatial[1..1]
             class: dummy_storage
@@ -115,8 +115,8 @@ architecture:
             required_actions:
               - update
               - read
-              - write
               - leak
+              - write
             enabled: true
           - name: weights_spad[1..168]
             class: smartbuffer_RF
@@ -140,8 +140,8 @@ architecture:
             required_actions:
               - update
               - read
-              - write
               - leak
+              - write
             enabled: true
           - name: psum_spad[1..168]
             class: smartbuffer_RF
@@ -166,8 +166,8 @@ architecture:
             required_actions:
               - update
               - read
-              - write
               - leak
+              - write
             enabled: true
           - name: mac[1..168]
             class: intmac
@@ -231,8 +231,8 @@ architecture_constraints:
           - Inputs
         type: bypass
         bypass:
-          - Outputs
           - Weights
+          - Outputs
         target: ifmap_spad
       - permutation: GNMCPQRS
         factors: N=1,M=1,C=1,P=1,Q=1,R=1,S=1
@@ -262,9 +262,9 @@ architecture_constraints:
         target: psum_spad
 problem:
     instance:
-        C: 128
+        C: 2048
         G: 1
-        M: 4096
+        M: 8192
         N: 1
         P: 1
         Q: 1
@@ -273,9 +273,9 @@ problem:
         densities: {}
     shape:
         coefficients:
-          - default: 128
+          - default: 2048
             name: Cgroup
-          - default: 4096
+          - default: 8192
             name: Mgroup
           - default: 1
             name: Hstride
@@ -321,7 +321,7 @@ problem:
           - N
           - P
           - Q
-        name: layers_3_mixer_dt_proj
+        name: layers_3_mixer_in_proj
     version: '0.4'
 compound_components:
     version: '0.4'

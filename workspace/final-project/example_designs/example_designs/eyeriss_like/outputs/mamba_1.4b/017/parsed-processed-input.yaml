@@ -242,8 +242,8 @@ architecture_constraints:
           - Weights
         type: bypass
         bypass:
-          - Inputs
           - Outputs
+          - Inputs
         target: weights_spad
       - permutation: GNMPQSCR
         factors: N=1,M=1,P=1,Q=1,S=1
@@ -264,7 +264,7 @@ problem:
     instance:
         C: 4096
         G: 1
-        M: 160
+        M: 2048
         N: 1
         P: 1
         Q: 1
@@ -275,7 +275,7 @@ problem:
         coefficients:
           - default: 4096
             name: Cgroup
-          - default: 160
+          - default: 2048
             name: Mgroup
           - default: 1
             name: Hstride
@@ -321,7 +321,7 @@ problem:
           - N
           - P
           - Q
-        name: layers_3_mixer_x_proj
+        name: layers_2_mixer_out_proj
     version: '0.4'
 compound_components:
     version: '0.4'

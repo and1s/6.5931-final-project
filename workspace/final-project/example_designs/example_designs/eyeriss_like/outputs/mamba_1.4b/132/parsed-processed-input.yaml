@@ -27,9 +27,9 @@ architecture:
                 meshY: 1
                 power_gated_at: null
             required_actions:
-              - write
-              - leak
               - update
+              - leak
+              - write
               - read
             enabled: true
           - name: shared_glb[1..1]
@@ -52,9 +52,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
-              - leak
               - update
+              - leak
+              - write
               - read
             enabled: true
           - name: inter_PE_column_spatial[1..1]
@@ -113,9 +113,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
-              - leak
               - update
+              - leak
+              - write
               - read
             enabled: true
           - name: weights_spad[1..168]
@@ -138,9 +138,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
-              - leak
               - update
+              - leak
+              - write
               - read
             enabled: true
           - name: psum_spad[1..168]
@@ -164,9 +164,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
-              - leak
               - update
+              - leak
+              - write
               - read
             enabled: true
           - name: mac[1..168]
@@ -262,9 +262,9 @@ architecture_constraints:
         target: psum_spad
 problem:
     instance:
-        C: 4096
+        C: 2048
         G: 1
-        M: 160
+        M: 8192
         N: 1
         P: 1
         Q: 1
@@ -273,9 +273,9 @@ problem:
         densities: {}
     shape:
         coefficients:
-          - default: 4096
+          - default: 2048
             name: Cgroup
-          - default: 160
+          - default: 8192
             name: Mgroup
           - default: 1
             name: Hstride
@@ -321,7 +321,7 @@ problem:
           - N
           - P
           - Q
-        name: layers_26_mixer_x_proj
+        name: layers_22_mixer_in_proj
     version: '0.4'
 compound_components:
     version: '0.4'

@@ -29,8 +29,8 @@ architecture:
             required_actions:
               - write
               - update
-              - read
               - leak
+              - read
             enabled: true
           - name: shared_glb[1..1]
             class: smartbuffer_SRAM
@@ -54,8 +54,8 @@ architecture:
             required_actions:
               - write
               - update
-              - read
               - leak
+              - read
             enabled: true
           - name: inter_PE_column_spatial[1..1]
             class: dummy_storage
@@ -115,8 +115,8 @@ architecture:
             required_actions:
               - write
               - update
-              - read
               - leak
+              - read
             enabled: true
           - name: weights_spad[1..168]
             class: smartbuffer_RF
@@ -140,8 +140,8 @@ architecture:
             required_actions:
               - write
               - update
-              - read
               - leak
+              - read
             enabled: true
           - name: psum_spad[1..168]
             class: smartbuffer_RF
@@ -166,8 +166,8 @@ architecture:
             required_actions:
               - write
               - update
-              - read
               - leak
+              - read
             enabled: true
           - name: mac[1..168]
             class: intmac
@@ -231,8 +231,8 @@ architecture_constraints:
           - Inputs
         type: bypass
         bypass:
-          - Outputs
           - Weights
+          - Outputs
         target: ifmap_spad
       - permutation: GNMCPQRS
         factors: N=1,M=1,C=1,P=1,Q=1,R=1,S=1
@@ -242,8 +242,8 @@ architecture_constraints:
           - Weights
         type: bypass
         bypass:
-          - Outputs
           - Inputs
+          - Outputs
         target: weights_spad
       - permutation: GNMPQSCR
         factors: N=1,M=1,P=1,Q=1,S=1
@@ -264,7 +264,7 @@ problem:
     instance:
         C: 4096
         G: 1
-        M: 160
+        M: 2048
         N: 1
         P: 1
         Q: 1
@@ -275,7 +275,7 @@ problem:
         coefficients:
           - default: 4096
             name: Cgroup
-          - default: 160
+          - default: 2048
             name: Mgroup
           - default: 1
             name: Hstride
@@ -321,7 +321,7 @@ problem:
           - N
           - P
           - Q
-        name: layers_33_mixer_x_proj
+        name: layers_27_mixer_out_proj
     version: '0.4'
 compound_components:
     version: '0.4'

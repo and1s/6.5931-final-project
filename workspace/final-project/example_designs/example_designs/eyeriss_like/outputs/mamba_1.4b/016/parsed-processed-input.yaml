@@ -27,9 +27,9 @@ architecture:
                 meshY: 1
                 power_gated_at: null
             required_actions:
-              - read
-              - update
               - leak
+              - update
+              - read
               - write
             enabled: true
           - name: shared_glb[1..1]
@@ -52,9 +52,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - read
-              - update
               - leak
+              - update
+              - read
               - write
             enabled: true
           - name: inter_PE_column_spatial[1..1]
@@ -113,9 +113,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - read
-              - update
               - leak
+              - update
+              - read
               - write
             enabled: true
           - name: weights_spad[1..168]
@@ -138,9 +138,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - read
-              - update
               - leak
+              - update
+              - read
               - write
             enabled: true
           - name: psum_spad[1..168]
@@ -164,9 +164,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - read
-              - update
               - leak
+              - update
+              - read
               - write
             enabled: true
           - name: mac[1..168]
@@ -185,7 +185,7 @@ architecture:
 architecture_constraints:
     targets:
       - type: temporal
-        permutation: PNRMC
+        permutation: QPNRC
         target: DRAM
       - keep:
           - Inputs
@@ -195,15 +195,15 @@ architecture_constraints:
         type: bypass
         target: shared_glb
       - type: temporal
-        permutation: PNRMC
+        permutation: QPNRC
         target: shared_glb
       - type: spatial
         factors: N=1,C=1,P=1,R=1,S=1
         permutation: NCPRSQM
         split: 7
         target: inter_PE_column_spatial
-      - factors: G=1,C=1,M=1,R=1,S=1,N=1,P=1,Q=1
-        permutation: GCMRSNPQ
+      - factors: C=1,M=1,R=1,S=1,N=1,P=1,Q=1
+        permutation: CMRSNPQ
         type: temporal
         target: inter_PE_column_spatial
       - bypass:
@@ -217,8 +217,8 @@ architecture_constraints:
         permutation: NPQRSCM
         split: 4
         target: inter_PE_spatial
-      - factors: G=1,C=1,M=1,R=1,S=1,N=1,P=1,Q=1
-        permutation: GCMRSNPQ
+      - factors: C=1,M=1,R=1,S=1,N=1,P=1,Q=1
+        permutation: CMRSNPQ
         type: temporal
         target: inter_PE_spatial
       - bypass:
@@ -242,8 +242,8 @@ architecture_constraints:
           - Weights
         type: bypass
         bypass:
-          - Inputs
           - Outputs
+          - Inputs
         target: weights_spad
       - permutation: NMPQSCR
         factors: N=1,M=1,P=1,Q=1,S=1
@@ -263,28 +263,30 @@ architecture_constraints:
 problem:
     instance:
         C: 1
-        G: 4096
-        M: 1
+        Hdilation: 1
+        Hstride: 1
+        M: 16
         N: 1
         P: 1
-        Q: 13
+        Q: 1
         R: 1
-        S: 4
+        S: 4096
+        Wdilation: 1
+        Wstride: 1
         densities: {}
     shape:
         coefficients:
           - default: 1
-            name: Cgroup
-          - default: 1
-            name: Mgroup
+            name: Wstride
           - default: 1
             name: Hstride
           - default: 1
-            name: Wstride
+            name: Wdilation
+          - default: 1
+            name: Hdilation
         data_spaces:
           - name: Weights
             projection:
-              -   -   - G
               -   -   - C
               -   -   - M
               -   -   - R
@@ -293,27 +295,24 @@ problem:
           - name: Inputs
             projection:
               -   -   - N
-              -   -   - G
-                      - Cgroup
-                  -   - C
+              -   -   - C
               -   -   - R
+                      - Wdilation
                   -   - P
-                      - Hstride
-              -   -   - S
-                  -   - Q
                       - Wstride
+              -   -   - S
+                      - Hdilation
+                  -   - Q
+                      - Hstride
             read_write: false
           - name: Outputs
             projection:
               -   -   - N
-              -   -   - G
-                      - Mgroup
-                  -   - M
-              -   -   - P
+              -   -   - M
               -   -   - Q
+              -   -   - P
             read_write: true
         dimensions:
-          - G
           - C
           - M
           - R
@@ -321,7 +320,7 @@ problem:
           - N
           - P
           - Q
-        name: layers_3_mixer_conv1d
+        name: matmul_2
     version: '0.4'
 compound_components:
     version: '0.4'
