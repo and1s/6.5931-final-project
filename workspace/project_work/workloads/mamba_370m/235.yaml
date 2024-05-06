@@ -5,7 +5,7 @@ problem:
     M: 1
     N: 1
     P: 1
-    Q: 13
+    Q: 256
     R: 1
     S: 4
   shape:

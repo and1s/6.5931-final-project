@@ -1,0 +1,8 @@
+problem:
+  shape:
+    name: "softmax"
+    dimensions: []
+    data_spaces:
+      - name: Input
+      - name: Output
+        read_write: True
