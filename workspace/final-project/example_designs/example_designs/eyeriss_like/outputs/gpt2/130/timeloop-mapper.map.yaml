@@ -1,0 +1,86 @@
+mapping:
+  - target: psum_spad
+    type: datatype
+    keep:
+      - Outputs
+    bypass:
+      - Weights
+      - Inputs
+  - target: weights_spad
+    type: datatype
+    keep:
+      - Weights
+    bypass:
+      - Inputs
+      - Outputs
+  - target: ifmap_spad
+    type: datatype
+    keep:
+      - Inputs
+    bypass:
+      - Weights
+      - Outputs
+  - target: inter_PE_spatial
+    type: datatype
+    keep:
+      []
+    bypass:
+      - Weights
+      - Inputs
+      - Outputs
+  - target: inter_PE_column_spatial
+    type: datatype
+    keep:
+      []
+    bypass:
+      - Weights
+      - Inputs
+      - Outputs
+  - target: shared_glb
+    type: datatype
+    keep:
+      - Inputs
+      - Outputs
+    bypass:
+      - Weights
+  - target: DRAM
+    type: datatype
+    keep:
+      - Weights
+      - Inputs
+      - Outputs
+    bypass:
+      []
+  - target: psum_spad
+    type: temporal
+    factors: C1 M16 R1 S1 N1 P1 Q1 G1
+    permutation: MCRSNPQG
+  - target: weights_spad
+    type: temporal
+    factors: C16 M1 R1 S1 N1 P1 Q1 G1
+    permutation: CMRSNPQG
+  - target: ifmap_spad
+    type: temporal
+    factors: C1 M1 R1 S1 N1 P1 Q1 G1
+    permutation: CMRSNPQG
+  - target: inter_PE_spatial
+    type: spatial
+    factors: C4 M2 R1 S1 N1 P1 Q1 G1
+    permutation: CMRSNPQG
+    split: 0
+  - target: inter_PE_spatial
+    type: temporal
+    factors: C1 M1 R1 S1 N1 P1 Q1 G1
+    permutation: CMRSNPQG
+  - target: inter_PE_column_spatial
+    type: temporal
+    factors: C1 M1 R1 S1 N1 P1 Q1 G1
+    permutation: CMRSNPQG
+  - target: shared_glb
+    type: temporal
+    factors: C2 M16 R1 S1 N1 P64 Q1 G1
+    permutation: PMCRSNQG
+  - target: DRAM
+    type: temporal
+    factors: C8 M8 R1 S1 N1 P4 Q1 G1
+    permutation: CPMRSNQG
