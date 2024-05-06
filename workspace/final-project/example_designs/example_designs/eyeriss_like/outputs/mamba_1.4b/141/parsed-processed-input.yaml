@@ -28,9 +28,9 @@ architecture:
                 power_gated_at: null
             required_actions:
               - read
-              - write
               - update
               - leak
+              - write
             enabled: true
           - name: shared_glb[1..1]
             class: smartbuffer_SRAM
@@ -53,9 +53,9 @@ architecture:
                 technology: "32nm"
             required_actions:
               - read
-              - write
               - update
               - leak
+              - write
             enabled: true
           - name: inter_PE_column_spatial[1..1]
             class: dummy_storage
@@ -114,9 +114,9 @@ architecture:
                 technology: "32nm"
             required_actions:
               - read
-              - write
               - update
               - leak
+              - write
             enabled: true
           - name: weights_spad[1..168]
             class: smartbuffer_RF
@@ -139,9 +139,9 @@ architecture:
                 technology: "32nm"
             required_actions:
               - read
-              - write
               - update
               - leak
+              - write
             enabled: true
           - name: psum_spad[1..168]
             class: smartbuffer_RF
@@ -165,9 +165,9 @@ architecture:
                 technology: "32nm"
             required_actions:
               - read
-              - write
               - update
               - leak
+              - write
             enabled: true
           - name: mac[1..168]
             class: intmac
@@ -253,8 +253,8 @@ architecture_constraints:
           - Outputs
         type: bypass
         bypass:
-          - Inputs
           - Weights
+          - Inputs
         target: psum_spad
       - permutation: GNCPQRSM
         factors: N=1,C=1,R=1,S=1,P=1,Q=1

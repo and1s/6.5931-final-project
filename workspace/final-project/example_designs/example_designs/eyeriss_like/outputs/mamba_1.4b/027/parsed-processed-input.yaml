@@ -231,8 +231,8 @@ architecture_constraints:
           - Inputs
         type: bypass
         bypass:
-          - Weights
           - Outputs
+          - Weights
         target: ifmap_spad
       - permutation: GNMCPQRS
         factors: N=1,M=1,C=1,P=1,Q=1,R=1,S=1

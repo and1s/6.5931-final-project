@@ -27,8 +27,8 @@ architecture:
                 meshY: 1
                 power_gated_at: null
             required_actions:
-              - write
               - read
+              - write
               - leak
               - update
             enabled: true
@@ -52,8 +52,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
               - read
+              - write
               - leak
               - update
             enabled: true
@@ -113,8 +113,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
               - read
+              - write
               - leak
               - update
             enabled: true
@@ -138,8 +138,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
               - read
+              - write
               - leak
               - update
             enabled: true
@@ -164,8 +164,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - write
               - read
+              - write
               - leak
               - update
             enabled: true

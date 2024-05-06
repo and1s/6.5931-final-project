@@ -27,8 +27,8 @@ architecture:
                 meshY: 1
                 power_gated_at: null
             required_actions:
-              - leak
               - write
+              - leak
               - read
               - update
             enabled: true
@@ -52,8 +52,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - leak
               - write
+              - leak
               - read
               - update
             enabled: true
@@ -113,8 +113,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - leak
               - write
+              - leak
               - read
               - update
             enabled: true
@@ -138,8 +138,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - leak
               - write
+              - leak
               - read
               - update
             enabled: true
@@ -164,8 +164,8 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
-              - leak
               - write
+              - leak
               - read
               - update
             enabled: true
@@ -231,8 +231,8 @@ architecture_constraints:
           - Inputs
         type: bypass
         bypass:
-          - Weights
           - Outputs
+          - Weights
         target: ifmap_spad
       - permutation: GNMCPQRS
         factors: N=1,M=1,C=1,P=1,Q=1,R=1,S=1
@@ -253,8 +253,8 @@ architecture_constraints:
           - Outputs
         type: bypass
         bypass:
-          - Weights
           - Inputs
+          - Weights
         target: psum_spad
       - permutation: GNCPQRSM
         factors: N=1,C=1,R=1,S=1,P=1,Q=1

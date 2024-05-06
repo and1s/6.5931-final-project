@@ -27,9 +27,9 @@ architecture:
                 meshY: 1
                 power_gated_at: null
             required_actions:
+              - update
               - leak
               - write
-              - update
               - read
             enabled: true
           - name: shared_glb[1..1]
@@ -52,9 +52,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
+              - update
               - leak
               - write
-              - update
               - read
             enabled: true
           - name: inter_PE_column_spatial[1..1]
@@ -113,9 +113,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
+              - update
               - leak
               - write
-              - update
               - read
             enabled: true
           - name: weights_spad[1..168]
@@ -138,9 +138,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
+              - update
               - leak
               - write
-              - update
               - read
             enabled: true
           - name: psum_spad[1..168]
@@ -164,9 +164,9 @@ architecture:
                 power_gated_at: null
                 technology: "32nm"
             required_actions:
+              - update
               - leak
               - write
-              - update
               - read
             enabled: true
           - name: mac[1..168]
@@ -231,8 +231,8 @@ architecture_constraints:
           - Inputs
         type: bypass
         bypass:
-          - Outputs
           - Weights
+          - Outputs
         target: ifmap_spad
       - permutation: NMCPQRS
         factors: N=1,M=1,C=1,P=1,Q=1,R=1,S=1
